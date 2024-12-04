@@ -5,7 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 // 动态引入组件
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
+const Contact = lazy(() => import('./pages/Contact/Contact'));
 
 // 创建包裹组件的工具函数
 const wrapSuspense = (Component: ComponentType) => {
