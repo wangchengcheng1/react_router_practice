@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, ComponentType } from 'react';
 import { RouteObject } from 'react-router-dom';
-import { Link, Outlet } from 'react-router-dom';
-import ErrorBoundary from './components/ErrorBoundary';
+import Sidebar from './components/Sidebar';
 
 // 动态引入组件
 const Home = lazy(() => import('./pages/Home'));
@@ -10,51 +9,33 @@ const Contact = lazy(() => import('./pages/Contact/Contact'));
 
 // 创建包裹组件的工具函数
 const wrapSuspense = (Component: ComponentType) => {
-  return (
-    <Suspense fallback={<div>加载中...</div>}>
-      <Component />
-    </Suspense>
-  );
-};
-
-// 创建根布局组件
-const RootLayout = () => {
-  return (
-    <ErrorBoundary>
-      <div>
-        <nav>
-          <ul>
-            <li><Link to="/">首页</Link></li>
-            <li><Link to="/about">关于</Link></li>
-            <li><Link to="/contact">联系我们</Link></li>
-          </ul>
-        </nav>
-        <Outlet />
-      </div>
-     </ErrorBoundary>
-  );
+    return (
+        <Suspense fallback={<div>加载中...</div>}>
+            <Component />
+        </Suspense>
+    );
 };
 
 // 定义路由配置
 const routes: RouteObject[] = [
-  {
-    path: '/',
-    element: <RootLayout />,
-    children: [
-      {
-        path: '',
-        element: wrapSuspense(Home),
-      },
-      {
-        path: 'about',
-        element: wrapSuspense(About),
-      },
-      {
-        path: 'contact',
-        element: wrapSuspense(Contact),
-      },
-    ],
-  },
+    {
+        path: '/',
+        element: <Sidebar />,
+        children: [
+            {
+                path: '',
+                element: wrapSuspense(Home),
+            },
+            {
+                path: 'about',
+                element: wrapSuspense(About),
+            },
+            {
+                path: 'contact',
+                element: wrapSuspense(Contact),
+            },
+        ],
+    },
 ];
 
 export default routes; 
