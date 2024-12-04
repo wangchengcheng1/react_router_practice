@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, ComponentType } from 'react';
 import { RouteObject } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
 
@@ -6,6 +6,15 @@ import { Link, Outlet } from 'react-router-dom';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
+
+// 创建包裹组件的工具函数
+const wrapSuspense = (Component: ComponentType) => {
+  return (
+    <Suspense fallback={<div>加载中...</div>}>
+      <Component />
+    </Suspense>
+  );
+};
 
 // 创建根布局组件
 const RootLayout = () => {
@@ -31,27 +40,15 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: (
-          <Suspense fallback={<div>加载中...</div>}>
-            <Home />
-          </Suspense>
-        ),
+        element: wrapSuspense(Home),
       },
       {
         path: 'about',
-        element: (
-          <Suspense fallback={<div>加载中...</div>}>
-            <About />
-          </Suspense>
-        ),
+        element: wrapSuspense(About),
       },
       {
         path: 'contact',
-        element: (
-          <Suspense fallback={<div>加载中...</div>}>
-            <Contact />
-          </Suspense>
-        ),
+        element: wrapSuspense(Contact),
       },
     ],
   },
