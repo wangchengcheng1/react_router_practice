@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import ContactSon from './ContactSon/ContactSon';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 const Contact: React.FC = () => {
   console.log('Contact 组件渲染');
@@ -26,8 +27,9 @@ const Contact: React.FC = () => {
       <h1>{count}</h1>
       <button onClick={() => setCount(count + 1)}>增加</button>
       <h1>儿子</h1>
-      {/* 每次传递过去都是新地址值，所以会重新渲染 */}
-      <ContactSon arr={memoArr} fn={memoFn}/>
+      <ErrorBoundary fallback={<div>子组件出错了！</div>}>
+        <ContactSon arr={memoArr} fn={memoFn}/>
+      </ErrorBoundary>
     </div>
   );
 };

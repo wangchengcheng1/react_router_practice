@@ -1,19 +1,22 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
 interface ContactSonProps {
   arr: number[];
-  fn:()=>void
+  fn: () => void;
 }
 
-const ContactSon = memo(({ arr }: ContactSonProps) => {
+const ContactSon = memo(({ arr, fn }: ContactSonProps) => {
   console.log('ContactSon 组件渲染');
+  useEffect(()=>{
+    console.log('contactSon组件挂载');
+    
+  },[])
+  // 添加一个状态来控制是否抛出错误
+  const [shouldError, setShouldError] = useState(false);
 
-  useEffect(() => {
-    console.log('ContactSon 组件挂载');
-    return () => {
-      console.log('ContactSon 组件卸载');
-    };
-  }, []);
+  if (shouldError) {
+    throw new Error('组件渲染时抛出的错误！');
+  }
 
   return (
     <div>
@@ -23,6 +26,7 @@ const ContactSon = memo(({ arr }: ContactSonProps) => {
           <span key={item}>{item} </span>
         ))}
       </div>
+      <button onClick={() => setShouldError(true)}>触发渲染错误</button>
     </div>
   );
 });

@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, ComponentType } from 'react';
 import { RouteObject } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // 动态引入组件
 const Home = lazy(() => import('./pages/Home'));
@@ -19,16 +20,18 @@ const wrapSuspense = (Component: ComponentType) => {
 // 创建根布局组件
 const RootLayout = () => {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li><Link to="/">首页</Link></li>
-          <li><Link to="/about">关于</Link></li>
-          <li><Link to="/contact">联系我们</Link></li>
-        </ul>
-      </nav>
-      <Outlet />
-    </div>
+    <ErrorBoundary>
+      <div>
+        <nav>
+          <ul>
+            <li><Link to="/">首页</Link></li>
+            <li><Link to="/about">关于</Link></li>
+            <li><Link to="/contact">联系我们</Link></li>
+          </ul>
+        </nav>
+        <Outlet />
+      </div>
+     </ErrorBoundary>
   );
 };
 
