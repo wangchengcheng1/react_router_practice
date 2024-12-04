@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import ContactSon from './ContactSon/ContactSon';
 
 const Contact: React.FC = () => {
@@ -16,6 +16,10 @@ const Contact: React.FC = () => {
   const memoArr=useMemo(()=>{
     return arr
   },[])
+  const fn=()=>{
+    console.log('fn')
+  }
+  const memoFn=useCallback(fn,[])
   return (
     <div>
       <h1>Contact Page</h1>
@@ -23,7 +27,7 @@ const Contact: React.FC = () => {
       <button onClick={() => setCount(count + 1)}>增加</button>
       <h1>儿子</h1>
       {/* 每次传递过去都是新地址值，所以会重新渲染 */}
-      <ContactSon arr={memoArr}/>
+      <ContactSon arr={memoArr} fn={memoFn}/>
     </div>
   );
 };

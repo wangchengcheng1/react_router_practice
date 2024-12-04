@@ -2,6 +2,7 @@ import React, { memo, useEffect } from 'react';
 
 interface ContactSonProps {
   arr: number[];
+  fn:()=>void
 }
 
 const ContactSon = memo(({ arr }: ContactSonProps) => {
