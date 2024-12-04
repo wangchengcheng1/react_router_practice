@@ -23,6 +23,11 @@
   margin-bottom: 10px;
 }
 
+.sidebar .submenu {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
 .sidebar a {
   text-decoration: none;
   color: #333;

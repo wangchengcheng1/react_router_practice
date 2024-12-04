@@ -24,12 +24,12 @@ const Contact: React.FC = () => {
   return (
     <div>
       <h1>Contact Page</h1>
-      <h1>{count}</h1>
+      {/* <h1>{count}</h1>
       <button onClick={() => setCount(count + 1)}>增加</button>
-      <h1>儿子</h1>
-      <ErrorBoundary fallback={<div>子组件出错了！</div>}>
+      <h1>儿子</h1> */}
+      {/* <ErrorBoundary fallback={<div>子组件出错了！</div>}>
         <ContactSon arr={memoArr} fn={memoFn}/>
-      </ErrorBoundary>
+      </ErrorBoundary> */}
     </div>
   );
 };
